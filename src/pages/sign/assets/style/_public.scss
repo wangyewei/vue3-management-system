@@ -1,0 +1,28 @@
+.btn {
+  width: 150px;
+  background-color: $main-color;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  color: $container-color;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+  // text-align: center;
+  // line-height: 49px;
+}
+
+.btn:hover {
+  background-color: $main-color-alt;
+}
+
+.disabled-btn {
+  background-color: $disabled-color;
+
+  &:hover {
+    background-color: $disabled-color;
+  }
+}
