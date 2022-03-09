@@ -4,7 +4,7 @@
  * @WeChat: Studio06k4
  * @Motto: 求知若渴，虚心若愚
  * @Description: 
- * @LastEditTime: 2022-03-09 15:16:44
+ * @LastEditTime: 2022-03-09 19:14:26
  * @Version: vue3后台管理系统
  * @FilePath: \vue3-management-system\src\plugins\element-plus.ts
  * @Autor: YeWei Wang
@@ -22,5 +22,7 @@ export {
   ElMenu,
   ElSubMenu,
   ElMenuItemGroup,
-  ElMenuItem
+  ElMenuItem,
+  ElCalendar,
+  ElProgress
 } from 'element-plus'

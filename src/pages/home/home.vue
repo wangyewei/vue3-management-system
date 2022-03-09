@@ -4,7 +4,7 @@
  * @WeChat: Studio06k4
  * @Motto: 求知若渴，虚心若愚
  * @Description: 
- * @LastEditTime: 2022-03-09 17:04:14
+ * @LastEditTime: 2022-03-09 18:23:52
  * @Version: vue3后台管理系统
  * @FilePath: \vue3-management-system\src\pages\home\home.vue
  * @Autor: YeWei Wang
@@ -33,17 +33,17 @@
             </template>
             <el-menu-item-group>
               <template #title>
-                <span>Group One</span>
+                <span>基本</span>
               </template>
               <el-menu-item index="1-1" @click="routerTo('/home/root')">概览</el-menu-item>
-              <el-menu-item index="1-2">item two</el-menu-item>
+              <el-menu-item index="1-2">个人资料</el-menu-item>
             </el-menu-item-group>
-            <el-menu-item-group title="Group Two">
-              <el-menu-item index="1-3">item three</el-menu-item>
+            <el-menu-item-group title="日程">
+              <el-menu-item index="1-3">公司日程安排</el-menu-item>
             </el-menu-item-group>
             <el-sub-menu index="1-4">
               <template #title>
-                <span>item four</span>
+                <span>工作计划</span>
               </template>
               <el-menu-item index="1-4-1">item one</el-menu-item>
             </el-sub-menu>
@@ -113,7 +113,7 @@ const routerTo = (path: string) => {
   router.push(path)
 }
 
-let isCollapse = ref<boolean>(true)
+let isCollapse = ref<boolean>(false)
 
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
@@ -138,6 +138,7 @@ const handleClose = (key: string, keyPath: string[]) => {
     height: calc(100vh - 6vh);
     .main-tab {
       max-width: 200px;
+      // margin-left: 20px;
       .tab-container {
         background: $main-color;
         color: $body-color;
@@ -147,15 +148,14 @@ const handleClose = (key: string, keyPath: string[]) => {
         position: relative;
 
         .el-menu-item.is-active {
-          background: $main-color-alt;
+          background: $main-color-active;
         }
 
         .el-sub-menu__title,
         .el-menu-item {
           color: $body-color;
-
           &:hover {
-            background: $main-color-alt;
+            background: $main-color-active;
           }
         }
 
@@ -163,13 +163,13 @@ const handleClose = (key: string, keyPath: string[]) => {
           // color: $body-color;
 
           .el-menu-item.is-active {
-            background: $main-color !important;
+            background: $main-color-active !important;
           }
           .el-menu-item {
             color: $container-color !important;
             // color: $body-color;
             &:hover {
-              background: $main-color;
+              background: $main-color-active;
             }
           }
         }
@@ -177,14 +177,14 @@ const handleClose = (key: string, keyPath: string[]) => {
           background: $main-color-alt;
           .el-sub-menu__title {
             &:hover {
-              background: $main-color;
+              background: $main-color-active;
             }
           }
           .el-menu-item {
-            color: $title-color;
+            // color: $title-color;
             color: $body-color;
             &:hover {
-              background: $main-color;
+              background: $main-color-active;
             }
           }
         }
@@ -209,7 +209,10 @@ const handleClose = (key: string, keyPath: string[]) => {
     }
 
     .main-container {
+      overflow-y: scroll;
+      overflow-x: hidden;
       flex: 1;
+      // padding: 0 0 60px 0;
     }
   }
 }

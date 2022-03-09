@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
-
 :root {
   --header-height: 3rem;
   --main-color: #e0415e;
+  --main-color-active: #a54658;
   --main-color-alt: #af1919;
   --title-color: #393939;
   --text-color: #707070;
@@ -11,19 +11,19 @@
   --body-color: #ffffff;
   --container-color: #f0f0f0;
 
-  --body-font: 'Popppins', sans-serif;
+  --body-font: "Popppins", sans-serif;
   --biggest-font-size: 2.25rem;
   --h1-font-size: 1.5rem;
   --h2-font-size: 1.25rem;
   --h3-font-size: 1rem;
-  --normal-font-size: .938rem;
-  --small-font-size: .813rem;
-  --smaller-font-size: .75rem;
+  --normal-font-size: 0.938rem;
+  --small-font-size: 0.813rem;
+  --smaller-font-size: 0.75rem;
 
   --font-medium: 500;
   --font-semo-bold: 600;
 
-  --mb-1: .5rem;
+  --mb-1: 0.5rem;
   --mb-2: 1rem;
   --mb-3: 1.5rem;
   --mb-4: 2rem;
@@ -33,12 +33,10 @@
   --z-tooltip: 10;
   --z-fixed: 100;
 
-
-  --error-color:#e84118;
+  --error-color: #e84118;
   --warn-color: #fbc531;
   --success-color: #4cd137;
   --disabled-color: #485460;
-
 
   --tab-body-color: #40739e;
   --tab-body-select-color: #273c75;
@@ -51,13 +49,14 @@
     --h2-font-size: 1.25rem;
     --h3-font-size: 1.25rem;
     --normal-font-size: 1rem;
-    --small-font-size: .875rem;
-    --smaller-font-size: .813rem;
+    --small-font-size: 0.875rem;
+    --smaller-font-size: 0.813rem;
   }
 }
 
 $header-height: var(--header-height);
 $main-color: var(--main-color);
+$main-color-active: var(--main-color-active);
 $main-color-alt: var(--main-color-alt);
 $title-color: var(--title-color);
 $text-color: var(--text-color);
@@ -91,7 +90,6 @@ $warn-color: var(--warn-color);
 $error-color: var(--error-color);
 $success-color: var(--success-color);
 $disabled-color: var(--disabled-color);
-
 
 $tab-body-color: var(--tab-body-color);
 $tab-body-select-color: var(--tab-body-select-color);
