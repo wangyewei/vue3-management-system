@@ -38,6 +38,10 @@
   --warn-color: #fbc531;
   --success-color: #4cd137;
   --disabled-color: #485460;
+
+
+  --tab-body-color: #40739e;
+  --tab-body-select-color: #273c75;
 }
 
 @media screen and (min-width: 758px) {
@@ -85,9 +89,12 @@ $z-fixed: var(--z-fixed);
 
 $warn-color: var(--warn-color);
 $error-color: var(--error-color);
-$success-corlor: var(--success-color);
+$success-color: var(--success-color);
 $disabled-color: var(--disabled-color);
 
+
+$tab-body-color: var(--tab-body-color);
+$tab-body-select-color: var(--tab-body-select-color);
 body.dark-theme {
   --title-color: #f1f3f2;
   --text-color: #c7d1cc;

@@ -4,7 +4,7 @@
  * @WeChat: Studio06k4
  * @Motto: 求知若渴，虚心若愚
  * @Description: 
- * @LastEditTime: 2021-12-09 16:36:42
+ * @LastEditTime: 2021-12-13 20:59:55
  * @Version: vue3后台管理系统
  * @FilePath: \vue3-management-system\vite.config.ts
  */
@@ -19,5 +19,9 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, 'src')
     }
+  },
+  esbuild: {
+    'jsxFactory': 'h',
+    'jsxFragment': 'Fragment'
   }
 })

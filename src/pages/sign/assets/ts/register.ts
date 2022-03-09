@@ -4,7 +4,7 @@
  * @WeChat: Studio06k4
  * @Motto: 求知若渴，虚心若愚
  * @Description: 注册
- * @LastEditTime: 2021-12-10 22:54:28
+ * @LastEditTime: 2021-12-23 19:52:27
  * @Version: vue3后台管理系统
  * @FilePath: \vue3-management-system\src\pages\sign\assets\ts\register.ts
  */
@@ -21,35 +21,18 @@
  */
 
 import axios, { AxiosPromise, AxiosResponse } from 'axios'
-import { reactive } from 'vue'
-import { postEmailSignUp, EmailSignUp, postFormSignUpJudge, FormSignupJudge, postSendEmailVertifyCode, postJudgeEmailVertifyCode } from '@/service/network'
-//
+import { reactive, toRefs } from 'vue'
+/**业务层接口 */
+import { postFormSignUpJudge , postSendEmailVertifyCode, postJudgeEmailVertifyCode } from '@/service/network'
 
-interface Register {
-  user: string;
-  pwd: string;
-  email: string;
-  warnTag: boolean;
-  userValid: number;
-  pwdValid: number;
-  emailValid: number;
-  isLoading: boolean;
-  step: number;
-  countDown: number;
-  emailVertifycode: string;
-  emailVertifyStatus: number;
-  formJudge: () => void;
-  checkUserValid: () => void;
-  checkEmailValid: () => void;
-  checkPwdValid: () => void;
-  emailJudge: () => void;
-  emailSendCode: (parame: EmailSignUp) => AxiosPromise; // 发送注册邮件
-  backone: () => void;
-  reSendVertiCode: () => void;
-  counterDown: () => void;
-  emailVertifyCodeJudge: () => void; // 邮箱验证码验证
-  emailVertifyCodeNext: () => void; // 邮箱验证码下一步
-}
+/**业务层接口类型 */
+import { 
+  FormSignupJudge,
+  SendMailVertifyCode
+} from '@/service/types'
+
+/**类型 */
+import {Register} from './types'
 
 
 export const register = reactive < Register > ({
@@ -61,10 +44,11 @@ export const register = reactive < Register > ({
   pwdValid: 0,
   emailValid: 0,
   isLoading: false,
-  step: 2,
+  step: 1,
   countDown: 0,
   emailVertifycode: '', // 邮箱验证码
   emailVertifyStatus: 0, // 邮箱验证码状态
+  // 验证用户名是否合法
   checkUserValid: (): void => {
     const reg: RegExp = /^[a-zA-Z0-9_-]{6,12}$/;
     if (register.user == '') {
@@ -75,6 +59,7 @@ export const register = reactive < Register > ({
       register.userValid = 3
     }
   },
+  // 验证邮箱合法
   checkEmailValid: (): void => {
     const reg: RegExp = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
     if (register.email == '') {
@@ -85,6 +70,7 @@ export const register = reactive < Register > ({
       register.emailValid = 3
     }
   },
+  // 验证密码合法
   checkPwdValid: (): void => {
     const reg: RegExp = /^.*(?=.{6,})(?=.*\d)(?=.*[a-z])(?=.*[!@#$%^&*?. ]).*$/;
     if (register.pwd == '') {
@@ -95,15 +81,14 @@ export const register = reactive < Register > ({
       register.pwdValid = 3
     }
   },
-  emailSendCode: (param: EmailSignUp): AxiosPromise => {
-    return postEmailSignUp(param)
-  },
+  // 倒计时 BUG: 改为后端计时
   counterDown: (): void => {
     const timer = setInterval(() => {
       register.countDown--
       if (register.countDown === 0) clearInterval(timer)
     }, 1000)
   },
+  // 表单验证
   formJudge: (): void => {
     if (register.countDown == 0) {
       if (register.userValid === 3 && register.pwdValid === 3 && register.emailValid === 3) {
@@ -122,13 +107,18 @@ export const register = reactive < Register > ({
           axios.spread((userRes: any, emailRes: any) => {
 
             if (userRes?.result === 0 && emailRes?.result === 0) {
-              postSendEmailVertifyCode(register.email).then((res: any) => {
-                console.log(res)
-              })
+              const parame: SendMailVertifyCode = {
+                user: register.user,
+                email: register.email,
+              }
+              postSendEmailVertifyCode(parame)
               register.countDown = 60
               register.counterDown()
               register.step = 2
             }
+
+            console.log(userRes)
+            console.log(emailRes)
             userRes?.result !== 0 && (register.userValid = 4)
             emailRes?.result !== 0 && (register.emailValid = 4)
 
@@ -147,20 +137,6 @@ export const register = reactive < Register > ({
     register.isLoading = true
     register.step--
     register.isLoading = false
-  },
-  reSendVertiCode: (): void => {
-    if (register.countDown === 0) {
-      register.emailSendCode({
-        user: register.user,
-        email: register.email,
-        pwd: register.pwd
-      }).then((res: any) => {
-        register.emailVertifycode = res?.result
-      })
-    }
-  },
-  emailJudge: (): void => {
-
   },
   emailVertifyCodeJudge: (): void => {
     if (register.emailVertifycode.length !== 6) {
@@ -181,5 +157,15 @@ export const register = reactive < Register > ({
         }
       })
     }
+  },
+  name: '',
+  nameStatus: 0,
+  checkNameValid: ():void => {
+    register.name.length ? register.nameStatus = 3 : register.nameStatus = 1
+  },
+  sex: [0 , 1],
+  currsex: 0,
+  checkSex: ():void => {
+    console.log(register.currsex)
   }
 })
